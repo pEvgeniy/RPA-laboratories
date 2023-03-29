@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SCL xmlns="http://www.iec.ch/61850/2003/SCL" version="2007" revision="B" release="4">
+    <Header id="" version="7.0.7" revision=""/>
+    <Communication>
+        <SubNetwork name="SubNetwork">
+            <ConnectedAP iedName="PTOC" apName="ap1">
+                <Address>
+                    <P type="IP">192.168.1.180</P>
+                    <P type="IP-SUBNET">255.255.255.0</P>
+                    <P type="IP-GATEWAY">0.0.0.0</P>
+                    <P type="PORT">102</P>
+                    <P type="OSI-PSEL">0001</P>
+                    <P type="OSI-SSEL">0001</P>
+                    <P type="OSI-TSEL">00000001</P>
+                    <P type="FTP-PORT">21</P>
+                    <P type="FTP-USER">admin</P>
+                    <P type="FTP-PASSWD">admin</P>
+                    <P type="FTP-DIR">comtrade</P>
+                    <P type="NTP-SERVER-1">192.168.1.73</P>
+                    <P type="SNMP-PORT">161</P>
+                </Address>
+                <GSE ldInst="OUT" cbName="gcbTrg">
+                    <Address>
+                        <P type="VLAN-ID">000</P>
+                        <P type="VLAN-PRIORITY">4</P>
+                        <P type="MAC-Address">01-0C-CD-01-00-17</P>
+                        <P type="MAC-Source">2C-FD-A1-E1-DE-E7</P>
+                        <P type="APPID">0002</P>
+                        <P type="GoID">2</P>
+                        <P type="IFACE">enp6s0</P>
+                    </Address>
+                    <MinTime unit="ms">2</MinTime>
+                    <MaxTime unit="ms">2000</MaxTime>
+                </GSE>
+            </ConnectedAP>
+        </SubNetwork>
+    </Communication>
+    <IED name="PTOC">
+        <Private type="TEMPLATE_PREFIX">T</Private>
+        <Services>
+            <DynAssociation max="10"/>
+            <SettingGroups>
+                <SGEdit resvTms="true"/>
+                <ConfSG resvTms="true"/>
+            </SettingGroups>
+            <GetDirectory/>
+            <GetDataObjectDefinition/>
+            <ReadWrite/>
+            <TimerActivatedControl/>
+            <GSEDir/>
+            <FileHandling mms="true"/>
+            <ConfLNs fixPrefix="true" fixLnInst="true"/>
+            <ClientServices supportsLdName="true" noIctBinding="true"/>
+            <ConfLdName/>
+        </Services>
+        <AccessPoint name="ap1">
+            <Server>
+                <Authentication none="true"/>
+                <LDevice inst="MEAS">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                    <LN prefix="" lnClass="LSVS" inst="1" lnType="LSVS_T" desc="Подписка на SV поток"/>
+                    <LN prefix="" lnClass="MMXU" inst="1" lnType="MMXU_T" desc="Трехфазные измерения"/>
+                </LDevice>
+                <LDevice inst="PROT">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                    <LN prefix="" lnClass="PTOC" inst="1" lnType="PTOC_T" desc="Максимальная токовая защита"/>
+                    <LN prefix="" lnClass="ISAF" inst="1" lnType="ISAF_T" desc="Сигнализация"/>
+                    <LN prefix="" lnClass="XCBR" inst="1" lnType="XCBR_T" desc="Выключатель"/>
+                    <LN prefix="" lnClass="LGOS" inst="1" lnType="LGOS_T" desc="Подписка на GOOSE поток"/>
+                    <LN prefix="" lnClass="XSWI" inst="1" lnType="XSWI_T" desc="Разъединитель"/>
+                    <LN prefix="" lnClass="XSWI" inst="2" lnType="XSWI_T" desc="ЗН"/>
+                    <LN prefix="" lnClass="CILO" inst="1" lnType="CILO_T" desc="ОБ разъединителя"/>
+                    <LN prefix="" lnClass="CILO" inst="2" lnType="CILO_T" desc="ОБ ЗН"/>
+                </LDevice>
+                <LDevice inst="REP">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <DataSet name="MeasureList">
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="A" fc="MX"/>
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="PhV" fc="MX"/>
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="TotW" fc="MX"/>
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="TotVar" fc="MX"/>
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="TotVA" fc="MX"/>
+                            <FCDA ldInst="MEAS" prefix="" lnClass="MMXU" lnInst="1" doName="Hz" fc="MX"/>
+                        </DataSet>
+                        <DataSet name="ProtList">
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Str" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Op" fc="ST"/>
+                        </DataSet>
+                        <ReportControl rptID="measureRep" confRev="1" buffered="false" bufTime="100" intgPd="3000" name="measureRep" datSet="MeasureList">
+                            <TrgOps dchg="true" qchg="true" dupd="true" period="true" gi="true"/>
+                            <OptFields seqNum="true" timeStamp="true" dataSet="true" entryID="true" configRef="true" bufOvfl="true"/>
+                        </ReportControl>
+                        <ReportControl rptID="protRep" confRev="1" buffered="false" bufTime="100" intgPd="3000" name="protRep" datSet="ProtList">
+                            <TrgOps dchg="true" qchg="true" dupd="true" period="true" gi="true"/>
+                            <OptFields seqNum="true" timeStamp="true" dataSet="true" entryID="true" configRef="true" bufOvfl="true"/>
+                        </ReportControl>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+                <LDevice inst="REG">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                    <LN prefix="" lnClass="RDRE" inst="1" lnType="RDRE_T" desc="Осциллограф"/>
+                </LDevice>
+                <LDevice inst="OUT">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <DataSet name="ProtTrg">
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Op" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Op" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Op" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Str" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Str" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="PTOC" lnInst="1" doName="Str" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Opn" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Opn" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Opn" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Cls" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Cls" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XCBR" lnInst="1" doName="Cls" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Opn" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Opn" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Opn" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Cls" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Cls" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="1" doName="Cls" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Opn" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Opn" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Opn" daName="t" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Cls" daName="general" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Cls" daName="q" fc="ST"/>
+                            <FCDA ldInst="PROT" prefix="" lnClass="XSWI" lnInst="2" doName="Cls" daName="t" fc="ST"/>
+                        </DataSet>
+                        <GSEControl appID="" confRev="1" name="gcbTrg" datSet="ProtTrg"/>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+            </Server>
+        </AccessPoint>
+    </IED>
+    <DataTypeTemplates>
+        <LNodeType lnClass="LLN0" id="LLN0_T">
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="LSVS" id="LSVS_T">
+            <DO name="InstIa" type="SAV_T"/>
+            <DO name="InstIb" type="SAV_T"/>
+            <DO name="InstIc" type="SAV_T"/>
+            <DO name="InstIn" type="SAV_T"/>
+            <DO name="InstUa" type="SAV_T"/>
+            <DO name="InstUb" type="SAV_T"/>
+            <DO name="InstUc" type="SAV_T"/>
+            <DO name="InstUn" type="SAV_T"/>
+            <DO name="Sync" type="SPS_T"/>
+            <DO name="Loop" type="SPS_T"/>
+            <DO name="PPS" type="MV_T"/>
+            <DO name="IFace" type="VSG_T"/>
+            <DO name="Mac" type="VSG_T"/>
+            <DO name="VlanID" type="ING_T"/>
+            <DO name="KI" type="ASG_T"/>
+            <DO name="KU" type="ASG_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="MMXU" id="MMXU_T">
+            <DO name="A" type="WYE_T"/>
+            <DO name="PPA" type="DEL_T"/>
+            <DO name="PhV" type="WYE_T"/>
+            <DO name="PPV" type="DEL_T"/>
+            <DO name="W" type="WYE_T"/>
+            <DO name="VAr" type="WYE_T"/>
+            <DO name="VA" type="WYE_T"/>
+            <DO name="TotW" type="MV_T"/>
+            <DO name="TotVar" type="MV_T"/>
+            <DO name="TotVA" type="MV_T"/>
+            <DO name="TotPF" type="MV_T"/>
+            <DO name="PF" type="WYE_T"/>
+            <DO name="Z" type="WYE_T"/>
+            <DO name="ZPP" type="DEL_T"/>
+            <DO name="Hz" type="MV_T"/>
+            <DO name="CalcMod" type="ENG_MMXU_CalcMod_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="PTOC" id="PTOC_T">
+            <DO name="Str" type="ACD_T"/>
+            <DO name="Op" type="ACT_T"/>
+            <DO name="OpMod" type="ENG_PTOC_OpMod_T"/>
+            <DO name="DirMod" type="ENG_PTOC_DirMod_T"/>
+            <DO name="StrVal" type="ASG_T"/>
+            <DO name="VstrEnaMod" type="SPG_T"/>
+            <DO name="OpDlTmms" type="ING_T"/>
+            <DO name="RsDlTmms" type="ING_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="ISAF" id="ISAF_T">
+            <DO name="Alm" type="SPS_T"/>
+            <DO name="AlmReset" type="SPC_T"/>
+            <DO name="OpCntRs" type="INC_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="XCBR" id="XCBR_T">
+            <DO name="Dsc" type="SPS_T"/>
+            <DO name="Pos" type="DPC_T"/>
+            <DO name="Opn" type="ACT_T"/>
+            <DO name="Cls" type="ACT_T"/>
+            <DO name="RepMod" type="SPS_T"/>
+            <DO name="OpCnt" type="INS_T"/>
+            <DO name="BlkCls" type="SPC_T"/>
+            <DO name="BlkOpn" type="SPC_T"/>
+            <DO name="Loc" type="SPS_T"/>
+            <DO name="QsMod" type="ING_T"/>
+            <DO name="ModGLow" type="SPG_T"/>
+            <DO name="ModGDis" type="SPG_T"/>
+            <DO name="DscTmms" type="ING_T"/>
+            <DO name="DscMod" type="SPG_T"/>
+            <DO name="OpOpnQual" type="ING_T"/>
+            <DO name="TrOpnQual" type="ING_T"/>
+            <DO name="OpClsQual" type="ING_T"/>
+            <DO name="TrClsQual" type="ING_T"/>
+            <DO name="OpCmdDur" type="ING_T"/>
+            <DO name="TrCmdDur" type="ING_T"/>
+            <DO name="ClsCmdDur" type="ING_T"/>
+            <DO name="Desc" type="VSG_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="LGOS" id="LGOS_T">
+            <DO name="SqNum" type="INS_T"/>
+            <DO name="StNum" type="INS_T"/>
+            <DO name="Sync" type="SPS_T"/>
+            <DO name="IFace" type="VSG_T"/>
+            <DO name="Mac" type="VSG_T"/>
+            <DO name="VlanID" type="ING_T"/>
+            <DO name="GoCBRef" type="VSG_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="XSWI" id="XSWI_T">
+            <DO name="OpMod" type="ENG_id_T"/>
+            <DO name="OpQual" type="ENG_id_T"/>
+            <DO name="Desc" type="VSG_T"/>
+            <DO name="OpCmdDur" type="ING_T"/>
+            <DO name="set_TmmsCls" type="ING_T"/>
+            <DO name="set_TmmsOpn" type="ING_T"/>
+            <DO name="Pos" type="DPC_T"/>
+            <DO name="Opn" type="ACT_T"/>
+            <DO name="Cls" type="ACT_T"/>
+            <DO name="OpCnt" type="INS_T"/>
+            <DO name="BlkCls" type="SPC_T"/>
+            <DO name="BlkOpn" type="SPC_T"/>
+            <DO name="Loc" type="SPS_T"/>
+            <DO name="OpTmAlm" type="SPS_T"/>
+            <DO name="OpTmAlmOpn" type="SPS_T"/>
+            <DO name="OpTmAlmCls" type="SPS_T"/>
+            <DO name="OpTmCls" type="MV_T"/>
+            <DO name="OpTmOpn" type="MV_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="CILO" id="CILO_T">
+            <DO name="EnaMod" type="SPG_T"/>
+            <DO name="OpMod" type="ENG_CILO_OpMod_T"/>
+            <DO name="ASet" type="ING_T"/>
+            <DO name="PhVSet" type="ING_T"/>
+            <DO name="EnaOpn" type="SPS_T"/>
+            <DO name="EnaCls" type="SPS_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <LNodeType lnClass="RDRE" id="RDRE_T">
+            <DO name="OpCntRs" type="INC_T"/>
+            <DO name="OpRcd" type="INC_T"/>
+            <DO name="RcdMade" type="SPS_T"/>
+            <DO name="FltNum" type="INS_T"/>
+            <DO name="GriFltNum" type="INS_T"/>
+            <DO name="RcdStr" type="SPS_T"/>
+            <DO name="MemUsed" type="INS_T"/>
+            <DO name="TrgMod" type="ING_T"/>
+            <DO name="PreTmms" type="ING_T"/>
+            <DO name="PstTmms" type="ING_T"/>
+            <DO name="PerTrgTms" type="ING_T"/>
+            <DO name="MemFull" type="ING_T"/>
+            <DO name="MaxNumRcd" type="ING_T"/>
+            <DO name="ReTrgMod" type="ING_T"/>
+            <DO name="Mod" type="ENC_Mod_T"/>
+            <DO name="Beh" type="ENS_Beh_T"/>
+            <DO name="Health" type="ENS_Health_T"/>
+            <DO name="NamPlt" type="LPL_T"/>
+        </LNodeType>
+        <DOType cdc="ENC" id="ENC_Mod_T">
+            <DA fc="ST" dchg="true" name="stVal" bType="Enum" type="Mod_T"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+            <DA fc="CF" dchg="true" name="ctlModel" bType="Enum" type="ctlModel_T"/>
+            <DA fc="CF" dchg="true" name="sboTimeout" bType="INT32U"/>
+        </DOType>
+        <DOType cdc="ENS" id="ENS_Beh_T">
+            <DA fc="ST" dchg="true" dupd="true" name="stVal" bType="Enum" type="Beh_T"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="LPL" id="LPL_T">
+            <DA fc="DC" name="vendor" bType="VisString255"/>
+            <DA fc="DC" name="swRev" bType="VisString255"/>
+            <DA fc="DC" name="d" bType="VisString255"/>
+            <DA fc="DC" name="configRev" bType="VisString255"/>
+            <DA fc="EX" name="ldNs" bType="VisString255"/>
+            <DA fc="EX" name="lnNs" bType="VisString255"/>
+            <DA fc="EX" name="cdcNs" bType="VisString255"/>
+            <DA fc="EX" name="cdcName" bType="VisString255"/>
+            <DA fc="EX" name="dataNs" bType="VisString255"/>
+        </DOType>
+        <DOType cdc="SAV" id="SAV_T">
+            <DA fc="MX" name="instMag" bType="Struct" type="AnalogueValue_T"/>
+            <DA fc="MX" qchg="true" name="q" bType="Quality"/>
+            <DA fc="MX" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="SPS" id="SPS_T">
+            <DA fc="ST" dchg="true" name="stVal" bType="BOOLEAN"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+            <DA fc="DC" name="d" bType="VisString255"/>
+        </DOType>
+        <DOType cdc="INS" id="INS_T">
+            <DA fc="ST" dchg="true" dupd="true" name="stVal" bType="INT32"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="VSG" id="VSG_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="VisString255"/>
+        </DOType>
+        <DOType cdc="ING" id="ING_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="INT32"/>
+            <DA fc="CF" dchg="true" name="minVal" bType="INT32"/>
+            <DA fc="CF" dchg="true" name="maxVal" bType="INT32"/>
+            <DA fc="CF" dchg="true" name="stepSize" bType="INT32"/>
+        </DOType>
+        <DOType cdc="ASG" id="ASG_T">
+            <DA fc="SP" dchg="true" name="setMag" bType="Struct" type="AnalogueValue_T"/>
+            <DA fc="CF" dchg="true" name="minVal" bType="Struct" type="AnalogueValue_T"/>
+            <DA fc="CF" dchg="true" name="maxVal" bType="Struct" type="AnalogueValue_T"/>
+            <DA fc="CF" dchg="true" name="stepSize" bType="Struct" type="AnalogueValue_T"/>
+        </DOType>
+        <DOType cdc="WYE" id="WYE_T">
+            <SDO name="phsA" type="CMV_T"/>
+            <SDO name="phsB" type="CMV_T"/>
+            <SDO name="phsC" type="CMV_T"/>
+            <SDO name="neut" type="CMV_T"/>
+        </DOType>
+        <DOType cdc="CMV" id="CMV_T">
+            <DA fc="MX" dchg="true" dupd="true" name="cVal" bType="Struct" type="Vector_T"/>
+            <DA fc="MX" qchg="true" name="q" bType="Quality"/>
+            <DA fc="MX" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="DEL" id="DEL_T">
+            <SDO name="phsAB" type="CMV_T"/>
+            <SDO name="phsBC" type="CMV_T"/>
+            <SDO name="phsCA" type="CMV_T"/>
+        </DOType>
+        <DOType cdc="MV" id="MV_T">
+            <DA fc="MX" dchg="true" dupd="true" name="mag" bType="Struct" type="AnalogueValue_T"/>
+            <DA fc="MX" qchg="true" name="q" bType="Quality"/>
+            <DA fc="MX" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="ENG" id="ENG_MMXU_CalcMod_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="Enum" type="MMXU_CalcMod_T"/>
+        </DOType>
+        <DOType cdc="ACD" id="ACD_T">
+            <DA fc="ST" dchg="true" name="general" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="dirGeneral" bType="Enum" type="dir_T"/>
+            <DA fc="ST" dchg="true" name="phsA" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="dirPhsA" bType="Enum" type="dir_T"/>
+            <DA fc="ST" dchg="true" name="phsB" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="dirPhsB" bType="Enum" type="dir_T"/>
+            <DA fc="ST" dchg="true" name="phsC" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="dirPhsC" bType="Enum" type="dir_T"/>
+            <DA fc="ST" dchg="true" name="neut" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="dirNeut" bType="Enum" type="dir_T"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="ACT" id="ACT_T">
+            <DA fc="ST" dchg="true" name="general" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="phsA" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="phsB" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="phsC" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="neut" bType="BOOLEAN"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+        </DOType>
+        <DOType cdc="SPG" id="SPG_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="BOOLEAN"/>
+        </DOType>
+        <DOType cdc="SPC" id="SPC_T">
+            <DA fc="CO" dchg="true" name="ctlVal" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="stVal" bType="BOOLEAN"/>
+            <DA fc="ST" name="ctlNum" bType="INT8U"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+            <DA fc="CO" name="Oper" bType="Struct" type="Operate_T"/>
+            <DA fc="CO" name="Cancel" bType="Struct" type="Cancel_T"/>
+            <DA fc="CO" name="SBOw" bType="Struct" type="SelectWithValue_T"/>
+            <DA fc="CO" name="SBO" bType="VisString255"/>
+            <DA fc="CF" dchg="true" name="ctlModel" bType="Enum" type="ctlModel_T"/>
+            <DA fc="CF" dchg="true" name="sboTimeout" bType="INT32U"/>
+        </DOType>
+        <DOType cdc="INC" id="INC_T">
+            <DA fc="CO" dchg="true" name="ctlVal" bType="INT32"/>
+            <DA fc="ST" dchg="true" name="stVal" bType="INT32"/>
+            <DA fc="ST" name="ctlNum" bType="INT8U"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+            <DA fc="CO" name="Oper" bType="Struct" type="Operate_T"/>
+            <DA fc="CO" name="Cancel" bType="Struct" type="Cancel_T"/>
+            <DA fc="CO" name="SBOw" bType="Struct" type="SelectWithValue_T"/>
+            <DA fc="CO" name="SBO" bType="VisString255"/>
+            <DA fc="CF" dchg="true" name="ctlModel" bType="Enum" type="ctlModel_T"/>
+            <DA fc="CF" dchg="true" name="sboTimeout" bType="INT32U"/>
+        </DOType>
+        <DOType cdc="DPC" id="DPC_T">
+            <DA fc="CO" dchg="true" name="ctlVal" bType="BOOLEAN"/>
+            <DA fc="ST" dchg="true" name="stVal" bType="Dbpos" type="Dbpos_T"/>
+            <DA fc="ST" name="ctlNum" bType="INT8U"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+            <DA fc="CO" name="Oper" bType="Struct" type="Operate_T"/>
+            <DA fc="CO" name="Cancel" bType="Struct" type="Cancel_T"/>
+            <DA fc="CO" name="SBOw" bType="Struct" type="SelectWithValue_T"/>
+            <DA fc="CO" name="SBO" bType="VisString255"/>
+            <DA fc="CF" dchg="true" name="ctlModel" bType="Enum" type="ctlModel_T"/>
+            <DA fc="CF" dchg="true" name="sboTimeout" bType="INT32U"/>
+        </DOType>
+        <DOType cdc="ENG" id="ENG_PTOC_OpMod_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="Enum" type="PTOC_OpMod_T"/>
+        </DOType>
+        <DOType cdc="ENG" id="ENG_PTOC_DirMod_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="Enum" type="PTOC_DirMod_T"/>
+        </DOType>
+        <DOType cdc="ENG" id="ENG_id_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="Enum" type="id_T"/>
+        </DOType>
+        <DOType cdc="ENG" id="ENG_CILO_OpMod_T">
+            <DA fc="SP" dchg="true" name="setVal" bType="Enum" type="CILO_OpMod_T"/>
+        </DOType>
+        <DOType cdc="ENS" id="ENS_Health_T">
+            <DA fc="ST" dchg="true" dupd="true" name="stVal" bType="Enum" type="Health_T"/>
+            <DA fc="ST" qchg="true" name="q" bType="Quality"/>
+            <DA fc="ST" name="t" bType="Timestamp"/>
+        </DOType>
+        <DAType id="AnalogueValue_T">
+            <BDA name="f" bType="FLOAT32"/>
+            <BDA name="i" bType="INT32"/>
+        </DAType>
+        <DAType id="Vector_T">
+            <BDA name="mag" bType="Struct" type="AnalogueValue_T"/>
+            <BDA name="ang" bType="Struct" type="AnalogueValue_T"/>
+            <BDA name="ortX" bType="Struct" type="AnalogueValue_T"/>
+            <BDA name="ortY" bType="Struct" type="AnalogueValue_T"/>
+        </DAType>
+        <DAType id="Operate_T">
+            <BDA name="ctlVal" bType="BOOLEAN"/>
+            <BDA name="ctlNum" bType="INT16U"/>
+            <BDA name="T" bType="Timestamp"/>
+            <BDA name="Test" bType="BOOLEAN"/>
+            <BDA name="origin" bType="Struct" type="Originator_T"/>
+            <BDA name="Check" bType="Check" type="Check_T"/>
+        </DAType>
+        <DAType id="Originator_T">
+            <BDA name="orCat" bType="Enum" type="orCat_T"/>
+            <BDA name="orIdent" bType="Octet64"/>
+        </DAType>
+        <DAType id="Cancel_T">
+            <BDA name="ctlVal" bType="BOOLEAN"/>
+            <BDA name="ctlNum" bType="INT16U"/>
+            <BDA name="T" bType="Timestamp"/>
+            <BDA name="Test" bType="BOOLEAN"/>
+            <BDA name="origin" bType="Struct" type="Originator_T"/>
+        </DAType>
+        <DAType id="SelectWithValue_T">
+            <BDA name="ctlVal" bType="BOOLEAN"/>
+            <BDA name="ctlNum" bType="INT16U"/>
+            <BDA name="T" bType="Timestamp"/>
+            <BDA name="Test" bType="BOOLEAN"/>
+            <BDA name="origin" bType="Struct" type="Originator_T"/>
+            <BDA name="Check" bType="Check" type="Check_T"/>
+        </DAType>
+        <EnumType id="Mod_T">
+            <EnumVal ord="1">on</EnumVal>
+            <EnumVal ord="2">blocked</EnumVal>
+            <EnumVal ord="3">test</EnumVal>
+            <EnumVal ord="4">test/blocked</EnumVal>
+            <EnumVal ord="5">off</EnumVal>
+        </EnumType>
+        <EnumType id="ctlModel_T">
+            <EnumVal ord="0">status-only</EnumVal>
+            <EnumVal ord="1">direct-with-normal-security</EnumVal>
+            <EnumVal ord="2">sbo-with-normal-security</EnumVal>
+            <EnumVal ord="3">direct-with-enhanced-security</EnumVal>
+            <EnumVal ord="4">sbo-with-enhanced-security</EnumVal>
+        </EnumType>
+        <EnumType id="Beh_T">
+            <EnumVal ord="1">on</EnumVal>
+            <EnumVal ord="2">blocked</EnumVal>
+            <EnumVal ord="3">test</EnumVal>
+            <EnumVal ord="4">test/blocked</EnumVal>
+            <EnumVal ord="5">off</EnumVal>
+        </EnumType>
+        <EnumType id="Health_T">
+            <EnumVal ord="1">Ok</EnumVal>
+            <EnumVal ord="2">Warning</EnumVal>
+            <EnumVal ord="3">Alarm</EnumVal>
+        </EnumType>
+        <EnumType id="MMXU_CalcMod_T">
+            <EnumVal ord="1">fixed</EnumVal>
+            <EnumVal ord="2">adaptive</EnumVal>
+        </EnumType>
+        <EnumType id="dir_T">
+            <EnumVal ord="0">unknown</EnumVal>
+            <EnumVal ord="1">forward</EnumVal>
+            <EnumVal ord="2">backward</EnumVal>
+            <EnumVal ord="3">both</EnumVal>
+        </EnumType>
+        <EnumType id="PTOC_OpMod_T">
+            <EnumVal ord="1">phase-currents-without-zero-sequence-compensation</EnumVal>
+            <EnumVal ord="2">line-currents</EnumVal>
+            <EnumVal ord="3">phase-currents-with-zero-sequence-compensation</EnumVal>
+            <EnumVal ord="4">zero-sequence-current</EnumVal>
+            <EnumVal ord="5">negative-sequence-current</EnumVal>
+            <EnumVal ord="6">positive-phase-sequence</EnumVal>
+        </EnumType>
+        <EnumType id="PTOC_DirMod_T">
+            <EnumVal ord="1">both</EnumVal>
+            <EnumVal ord="2">forward</EnumVal>
+            <EnumVal ord="3">backward</EnumVal>
+        </EnumType>
+        <EnumType id="orCat_T">
+            <EnumVal ord="0">not-supported</EnumVal>
+            <EnumVal ord="1">bay-control</EnumVal>
+            <EnumVal ord="2">station-control</EnumVal>
+            <EnumVal ord="3">remote-control</EnumVal>
+            <EnumVal ord="4">automatic-bay</EnumVal>
+            <EnumVal ord="5">automatic-station</EnumVal>
+            <EnumVal ord="6">automatic-remote</EnumVal>
+            <EnumVal ord="7">maintenance</EnumVal>
+            <EnumVal ord="8">process</EnumVal>
+        </EnumType>
+        <EnumType id="Check_T">
+            <EnumVal ord="0">no-check</EnumVal>
+            <EnumVal ord="1">synchrocheck</EnumVal>
+            <EnumVal ord="2">interlocking-check</EnumVal>
+            <EnumVal ord="3">both</EnumVal>
+        </EnumType>
+        <EnumType id="Dbpos_T">
+            <EnumVal ord="0">intermediate</EnumVal>
+            <EnumVal ord="1">off</EnumVal>
+            <EnumVal ord="2">on</EnumVal>
+            <EnumVal ord="3">bad</EnumVal>
+        </EnumType>
+        <EnumType id="id_T"/>
+        <EnumType id="CILO_OpMod_T">
+            <EnumVal ord="1">switchgear</EnumVal>
+            <EnumVal ord="2">earthing-switch</EnumVal>
+        </EnumType>
+    </DataTypeTemplates>
+</SCL>

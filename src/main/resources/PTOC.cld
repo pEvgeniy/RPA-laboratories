@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SCL version="2007" revision="B" release="4" xmlns="http://www.iec.ch/61850/2003/SCL">
+    <Header id="" version="7.0.7" revision=""/>
+    <IED name="PTOC">
+        <AccessPoint name="ap1">
+            <Server>
+                <Authentication none="true"/>
+                <LDevice inst="MEAS">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <Private type="CLD_PROCESS">
+						    <SGCB actSG="1" numOfSGs="1">
+						        <SettingsGroup inOfSg="1">
+						            <SettingValue ref="LSVS1.IFace.setVal" value="enp6s0"/>
+						            <SettingValue ref="LSVS1.Mac.setVal" value="01:0C:CD:04:00:01"/>
+						            <SettingValue ref="LSVS1.VlanID.setVal" value="-1"/>
+						            <SettingValue ref="LSVS1.KI.setMag.f" value="0.001"/>
+						            <SettingValue ref="LSVS1.KU.setMag.f" value="0.01"/>
+						            <SettingValue ref="MMXU1.CalcMod.setVal" value="1"/>
+						        </SettingsGroup>
+						    </SGCB>
+						    <CNCB>
+						        <Connection src="MEAS/LSVS1.InstIa" dst="MEAS/MMXU1.InstIa"/>
+						        <Connection src="MEAS/LSVS1.InstIb" dst="MEAS/MMXU1.InstIb"/>
+						        <Connection src="MEAS/LSVS1.InstIc" dst="MEAS/MMXU1.InstIc"/>
+						        <Connection src="MEAS/LSVS1.InstIn" dst="MEAS/MMXU1.InstIn"/>
+						        <Connection src="MEAS/LSVS1.InstUa" dst="MEAS/MMXU1.InstUa"/>
+						        <Connection src="MEAS/LSVS1.InstUb" dst="MEAS/MMXU1.InstUb"/>
+						        <Connection src="MEAS/LSVS1.InstUc" dst="MEAS/MMXU1.InstUc"/>
+						        <Connection src="MEAS/LSVS1.InstUn" dst="MEAS/MMXU1.InstUn"/>
+						        <Connection src="MEAS/MMXU1.A" dst="PROT/PTOC1.A" xSrc="480.0" ySrc="120.0" xDst="30.0" yDst="360.0" c1="22.5"/>
+						        <Connection src="MEAS/LSVS1.InstIa" dst="REG/RDRE1.Osc1" xSrc="300.0" ySrc="60.0" xDst="30.0" yDst="90.0" c5="15.0">
+						            <Connection src="MEAS/LSVS1.InstIa.instMag.f" dst="REG/RDRE1.Osc1.data"/>
+						        </Connection>
+						        <Connection src="MEAS/LSVS1.InstIb" dst="REG/RDRE1.Osc2" xSrc="300.0" ySrc="90.0" xDst="30.0" yDst="120.0">
+						            <Connection src="MEAS/LSVS1.InstIb.instMag.f" dst="REG/RDRE1.Osc2.data"/>
+						        </Connection>
+						        <Connection src="MEAS/LSVS1.InstIc" dst="REG/RDRE1.Osc3" xSrc="300.0" ySrc="120.0" xDst="30.0" yDst="150.0">
+						            <Connection src="MEAS/LSVS1.InstIc.instMag.f" dst="REG/RDRE1.Osc3.data"/>
+						        </Connection>
+						        <Connection src="MEAS/LSVS1.InstUa" dst="REG/RDRE1.Osc4" xSrc="300.0" ySrc="180.0" xDst="30.0" yDst="210.0" c5="-22.5">
+						            <Connection src="MEAS/LSVS1.InstUa.instMag.f" dst="REG/RDRE1.Osc4.data"/>
+						        </Connection>
+						        <Connection src="MEAS/LSVS1.InstUb" dst="REG/RDRE1.Osc5" xSrc="300.0" ySrc="210.0" xDst="30.0" yDst="240.0" c5="-15.0">
+						            <Connection src="MEAS/LSVS1.InstUb.instMag.f" dst="REG/RDRE1.Osc5.data"/>
+						        </Connection>
+						        <Connection src="MEAS/LSVS1.InstUc" dst="REG/RDRE1.Osc6" xSrc="300.0" ySrc="240.0" xDst="30.0" yDst="270.0" c5="-7.5">
+						            <Connection src="MEAS/LSVS1.InstUc.instMag.f" dst="REG/RDRE1.Osc6.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.A" dst="REG/RDRE1.Osc7" xSrc="510.0" ySrc="60.0" xDst="30.0" yDst="330.0" c5="7.5">
+						            <Connection src="MEAS/MMXU1.A.phsA.cVal.mag.f" dst="REG/RDRE1.Osc7.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.A" dst="REG/RDRE1.Osc8" xSrc="510.0" ySrc="60.0" xDst="30.0" yDst="360.0" c5="7.5">
+						            <Connection src="MEAS/MMXU1.A.phsB.cVal.mag.f" dst="REG/RDRE1.Osc8.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.A" dst="REG/RDRE1.Osc9" xSrc="510.0" ySrc="60.0" xDst="30.0" yDst="390.0" c5="7.5">
+						            <Connection src="MEAS/MMXU1.A.phsC.cVal.mag.f" dst="REG/RDRE1.Osc9.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.PhV" dst="REG/RDRE1.Osc10" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="450.0">
+						            <Connection src="MEAS/MMXU1.PhV.phsA.cVal.mag.f" dst="REG/RDRE1.Osc10.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.PhV" dst="REG/RDRE1.Osc11" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="480.0">
+						            <Connection src="MEAS/MMXU1.PhV.phsB.cVal.mag.f" dst="REG/RDRE1.Osc11.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.PhV" dst="REG/RDRE1.Osc12" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="510.0">
+						            <Connection src="MEAS/MMXU1.PhV.phsC.cVal.mag.f" dst="REG/RDRE1.Osc12.data"/>
+						        </Connection>
+						        <Connection src="MEAS/MMXU1.A" dst="PROT/CILO1.A" xSrc="480.0" ySrc="60.0" xDst="1110.0" yDst="270.0"/>
+						        <Connection src="MEAS/MMXU1.PhV" dst="PROT/CILO2.PhV" xSrc="480.0" ySrc="150.0" xDst="1110.0" yDst="540.0"/>
+						    </CNCB>
+						</Private>
+                        <Private type="CLD_GUI">
+						    <LOCB>
+						        <Node ref="LSVS1" x="60.0" y="60.0"/>
+						        <Node ref="MMXU1" x="270.0" y="60.0"/>
+						        <Connection src="MEAS/MMXU1.A" dst="REP/LLN0.measureRep.Rep1" xSrc="510.0" ySrc="60.0" xDst="60.0" yDst="60.0"/>
+						        <Connection src="MEAS/MMXU1.PhV" dst="REP/LLN0.measureRep.Rep2" xSrc="510.0" ySrc="120.0" xDst="60.0" yDst="90.0"/>
+						        <Connection src="MEAS/MMXU1.TotW" dst="REP/LLN0.measureRep.Rep3" xSrc="510.0" ySrc="270.0" xDst="60.0" yDst="120.0"/>
+						        <Connection src="MEAS/MMXU1.TotVar" dst="REP/LLN0.measureRep.Rep4" xSrc="510.0" ySrc="300.0" xDst="60.0" yDst="150.0"/>
+						        <Connection src="MEAS/MMXU1.TotVA" dst="REP/LLN0.measureRep.Rep5" xSrc="510.0" ySrc="330.0" xDst="60.0" yDst="180.0" c5="7.5"/>
+						        <Connection src="MEAS/MMXU1.Hz" dst="REP/LLN0.measureRep.Rep6" xSrc="510.0" ySrc="480.0" xDst="60.0" yDst="210.0" c5="30.0"/>
+						    </LOCB>
+						</Private>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+                <LDevice inst="PROT">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <Private type="CLD_PROCESS">
+						    <SGCB actSG="1" numOfSGs="1">
+						        <SettingsGroup inOfSg="1">
+						            <SettingValue ref="PTOC1.OpMod.setVal" value="1"/>
+						            <SettingValue ref="PTOC1.DirMod.setVal" value="1"/>
+						            <SettingValue ref="PTOC1.StrVal.setMag.f" value="700.0"/>
+						            <SettingValue ref="PTOC1.VstrEnaMod.setVal" value="false"/>
+						            <SettingValue ref="PTOC1.OpDlTmms.setVal" value="500"/>
+						            <SettingValue ref="PTOC1.RsDlTmms.setVal" value="100"/>
+						            <SettingValue ref="XCBR1.QsMod.setVal" value="2"/>
+						            <SettingValue ref="XCBR1.ModGLow.setVal" value="false"/>
+						            <SettingValue ref="XCBR1.ModGDis.setVal" value="false"/>
+						            <SettingValue ref="XCBR1.DscTmms.setVal" value="0"/>
+						            <SettingValue ref="XCBR1.DscMod.setVal" value="false"/>
+						            <SettingValue ref="XCBR1.OpOpnQual.setVal" value="1"/>
+						            <SettingValue ref="XCBR1.TrOpnQual.setVal" value="1"/>
+						            <SettingValue ref="XCBR1.OpClsQual.setVal" value="1"/>
+						            <SettingValue ref="XCBR1.TrClsQual.setVal" value="1"/>
+						            <SettingValue ref="XCBR1.OpCmdDur.setVal" value="200"/>
+						            <SettingValue ref="XCBR1.TrCmdDur.setVal" value="500"/>
+						            <SettingValue ref="XCBR1.ClsCmdDur.setVal" value="500"/>
+						            <SettingValue ref="XCBR1.Desc.setVal" value="Выключатель 1"/>
+						            <SettingValue ref="LGOS1.IFace.setVal" value="enp6s0"/>
+						            <SettingValue ref="LGOS1.Mac.setVal" value="01:0C:CD:01:07:01"/>
+						            <SettingValue ref="LGOS1.VlanID.setVal" value="-1"/>
+						            <SettingValue ref="LGOS1.GoCBRef.setVal" value="MU_W4E-QABRC/LLN0$GO$Gcb01"/>
+						            <SettingValue ref="XSWI1.OpMod.setVal" value="1"/>
+						            <SettingValue ref="XSWI1.OpQual.setVal" value="1"/>
+						            <SettingValue ref="XSWI1.Desc.setVal" value="Разъединитель 1"/>
+						            <SettingValue ref="XSWI1.OpCmdDur.setVal" value="200"/>
+						            <SettingValue ref="XSWI1.set_TmmsCls.setVal" value="200"/>
+						            <SettingValue ref="XSWI1.set_TmmsOpn.setVal" value="200"/>
+						            <SettingValue ref="XSWI2.OpMod.setVal" value="1"/>
+						            <SettingValue ref="XSWI2.OpQual.setVal" value="1"/>
+						            <SettingValue ref="XSWI2.Desc.setVal" value="Заземляющий нож 1"/>
+						            <SettingValue ref="XSWI2.OpCmdDur.setVal" value="200"/>
+						            <SettingValue ref="XSWI2.set_TmmsCls.setVal" value="200"/>
+						            <SettingValue ref="XSWI2.set_TmmsOpn.setVal" value="200"/>
+						            <SettingValue ref="CILO1.EnaMod.setVal" value="true"/>
+						            <SettingValue ref="CILO1.OpMod.setVal" value="1"/>
+						            <SettingValue ref="CILO1.ASet.setVal" value="100"/>
+						            <SettingValue ref="CILO1.PhVSet.setVal" value="1000"/>
+						            <SettingValue ref="CILO2.EnaMod.setVal" value="true"/>
+						            <SettingValue ref="CILO2.OpMod.setVal" value="2"/>
+						            <SettingValue ref="CILO2.ASet.setVal" value="100"/>
+						            <SettingValue ref="CILO2.PhVSet.setVal" value="1000"/>
+						        </SettingsGroup>
+						    </SGCB>
+						    <CNCB>
+						        <Connection src="PROT/PTOC1.Op" dst="PROT/XCBR1.TrOpn" c1="105.0"/>
+						        <Connection src="PROT/PTOC1.Op" dst="PROT/ISAF1.in"/>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XCBR1.PosCls1" c1="30.0">
+						            <Connection src="PROT/LGOS1.DataSet.data(1)" dst="PROT/XCBR1.PosCls1.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XCBR1.PosOpn">
+						            <Connection src="PROT/LGOS1.DataSet.data(2)" dst="PROT/XCBR1.PosOpn.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Op" dst="REG/RDRE1.Trg1" xSrc="450.0" ySrc="270.0" xDst="30.0" yDst="30.0" c5="30.0">
+									<Connection src="PROT/PTOC1.Op.general" dst="REG/RDRE1.Trg1"/>
+								</Connection>
+						        <Connection src="PROT/XCBR1.Pos" dst="REG/RDRE1.Osc13" xSrc="960.0" ySrc="60.0" xDst="30.0" yDst="570.0">
+						            <Connection src="PROT/XCBR1.Pos.ctlVal" dst="REG/RDRE1.Osc13.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Str" dst="REG/RDRE1.Osc14" xSrc="510.0" ySrc="90.0" xDst="30.0" yDst="630.0">
+						            <Connection src="PROT/PTOC1.Str.phsA" dst="REG/RDRE1.Osc14.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Str" dst="REG/RDRE1.Osc15" xSrc="510.0" ySrc="90.0" xDst="30.0" yDst="660.0">
+						            <Connection src="PROT/PTOC1.Str.phsB" dst="REG/RDRE1.Osc15.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Str" dst="REG/RDRE1.Osc16" xSrc="510.0" ySrc="90.0" xDst="30.0" yDst="690.0">
+						            <Connection src="PROT/PTOC1.Str.phsC" dst="REG/RDRE1.Osc16.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Str" dst="REG/RDRE1.Osc17" xSrc="510.0" ySrc="90.0" xDst="30.0" yDst="720.0">
+						            <Connection src="PROT/PTOC1.Str.general" dst="REG/RDRE1.Osc17.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Op" dst="REG/RDRE1.Osc18" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="780.0">
+						            <Connection src="PROT/PTOC1.Op.phsA" dst="REG/RDRE1.Osc18.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Op" dst="REG/RDRE1.Osc19" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="810.0">
+						            <Connection src="PROT/PTOC1.Op.phsB" dst="REG/RDRE1.Osc19.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Op" dst="REG/RDRE1.Osc20" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="840.0">
+						            <Connection src="PROT/PTOC1.Op.phsC" dst="REG/RDRE1.Osc20.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Op" dst="REG/RDRE1.Osc21" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="870.0">
+						            <Connection src="PROT/PTOC1.Op.general" dst="REG/RDRE1.Osc21.data"/>
+						        </Connection>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XSWI1.PosCls" c1="810.0">
+						            <Connection src="PROT/LGOS1.DataSet.data(3)" dst="PROT/XSWI1.PosCls.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XSWI1.PosOpn" c1="795.0">
+						            <Connection src="PROT/LGOS1.DataSet.data(4)" dst="PROT/XSWI1.PosOpn.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XSWI2.PosCls" c1="780.0">
+						            <Connection src="PROT/LGOS1.DataSet.data(5)" dst="PROT/XSWI2.PosCls.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/LGOS1.DataSet" dst="PROT/XSWI2.PosOpn" c1="765.0">
+						            <Connection src="PROT/LGOS1.DataSet.data(6)" dst="PROT/XSWI2.PosOpn.stVal"/>
+						        </Connection>
+						        <Connection src="PROT/CILO1.EnaOpn" dst="PROT/XSWI1.EnaOpn"/>
+						        <Connection src="PROT/CILO1.EnaCls" dst="PROT/XSWI1.EnaCls" c1="-15.0"/>
+						        <Connection src="PROT/XCBR1.Pos" dst="PROT/CILO1.BrPos" c1="37.5"/>
+						        <Connection src="PROT/XSWI2.Pos" dst="PROT/CILO1.GrBrPos" c2="15.0" c3="375.0" c4="-210.0"/>
+						        <Connection src="PROT/XSWI1.Pos" dst="PROT/CILO2.SwBrPos" c2="30.0" c3="307.5" c4="-225.0"/>
+						        <Connection src="PROT/CILO2.EnaOpn" dst="PROT/XSWI2.EnaOpn" c1="-15.0"/>
+						        <Connection src="PROT/CILO2.EnaCls" dst="PROT/XSWI2.EnaCls" c1="-30.0"/>
+						    </CNCB>
+						</Private>
+                        <Private type="CLD_GUI">
+						    <LOCB>
+						        <Node ref="PTOC1" x="240.0" y="330.0"/>
+						        <Node ref="ISAF1" x="450.0" y="480.0"/>
+						        <Node ref="XCBR1" x="870.0" y="180.0"/>
+						        <Node ref="LGOS1" x="630.0" y="90.0"/>
+						        <Node ref="XSWI1" x="1620.0" y="150.0"/>
+						        <Node ref="XSWI2" x="1620.0" y="420.0"/>
+						        <Node ref="CILO1" x="1320.0" y="180.0"/>
+						        <Node ref="CILO2" x="1320.0" y="420.0"/>
+						        <Connection src="PROT/PTOC1.Str" dst="REP/LLN0.protRep.Rep1" xSrc="510.0" ySrc="90.0" xDst="510.0" yDst="60.0"/>
+						        <Connection src="PROT/PTOC1.Op" dst="REP/LLN0.protRep.Rep2" xSrc="510.0" ySrc="120.0" xDst="510.0" yDst="90.0"/>
+						        <Connection src="PROT/PTOC1.Op" dst="OUT/LLN0.gcbTrg.Out1" xSrc="510.0" ySrc="120.0" xDst="30.0" yDst="60.0">
+						            <Connection src="PROT/PTOC1.Op.q" dst="OUT/LLN0.gcbTrg.Out1.q"/>
+						            <Connection src="PROT/PTOC1.Op.t" dst="OUT/LLN0.gcbTrg.Out1.t"/>
+						            <Connection src="PROT/PTOC1.Op.general" dst="OUT/LLN0.gcbTrg.Out1.data"/>
+						        </Connection>
+						        <Connection src="PROT/PTOC1.Str" dst="OUT/LLN0.gcbTrg.Out2" xSrc="510.0" ySrc="90.0" xDst="30.0" yDst="90.0">
+						            <Connection src="PROT/PTOC1.Str.q" dst="OUT/LLN0.gcbTrg.Out2.q"/>
+						            <Connection src="PROT/PTOC1.Str.t" dst="OUT/LLN0.gcbTrg.Out2.t"/>
+						            <Connection src="PROT/PTOC1.Str.general" dst="OUT/LLN0.gcbTrg.Out2.data"/>
+						        </Connection>
+						        <Connection src="PROT/XCBR1.Opn" dst="OUT/LLN0.gcbTrg.Out3" xSrc="1050.0" ySrc="120.0" xDst="30.0" yDst="150.0">
+						            <Connection src="PROT/XCBR1.Opn.q" dst="OUT/LLN0.gcbTrg.Out3.q"/>
+						            <Connection src="PROT/XCBR1.Opn.t" dst="OUT/LLN0.gcbTrg.Out3.t"/>
+						            <Connection src="PROT/XCBR1.Opn.general" dst="OUT/LLN0.gcbTrg.Out3.data"/>
+						        </Connection>
+						        <Connection src="PROT/XCBR1.Cls" dst="OUT/LLN0.gcbTrg.Out4" xSrc="1050.0" ySrc="150.0" xDst="30.0" yDst="180.0" c5="15.0">
+						            <Connection src="PROT/XCBR1.Cls.q" dst="OUT/LLN0.gcbTrg.Out4.q"/>
+						            <Connection src="PROT/XCBR1.Cls.t" dst="OUT/LLN0.gcbTrg.Out4.t"/>
+						            <Connection src="PROT/XCBR1.Cls.general" dst="OUT/LLN0.gcbTrg.Out4.data"/>
+						        </Connection>
+						        <Connection src="PROT/XSWI1.Opn" dst="OUT/LLN0.gcbTrg.Out5" xSrc="1380.0" ySrc="210.0" xDst="30.0" yDst="240.0" c5="22.5">
+						            <Connection src="PROT/XSWI1.Opn.q" dst="OUT/LLN0.gcbTrg.Out5.q"/>
+						            <Connection src="PROT/XSWI1.Opn.t" dst="OUT/LLN0.gcbTrg.Out5.t"/>
+						            <Connection src="PROT/XSWI1.Opn.general" dst="OUT/LLN0.gcbTrg.Out5.data"/>
+						        </Connection>
+						        <Connection src="PROT/XSWI1.Cls" dst="OUT/LLN0.gcbTrg.Out6" xSrc="1380.0" ySrc="240.0" xDst="30.0" yDst="270.0" c5="37.5">
+						            <Connection src="PROT/XSWI1.Cls.q" dst="OUT/LLN0.gcbTrg.Out6.q"/>
+						            <Connection src="PROT/XSWI1.Cls.t" dst="OUT/LLN0.gcbTrg.Out6.t"/>
+						            <Connection src="PROT/XSWI1.Cls.general" dst="OUT/LLN0.gcbTrg.Out6.data"/>
+						        </Connection>
+						        <Connection src="PROT/XSWI2.Opn" dst="OUT/LLN0.gcbTrg.Out7" xSrc="1620.0" ySrc="210.0" xDst="30.0" yDst="330.0" c5="37.5">
+						            <Connection src="PROT/XSWI2.Opn.q" dst="OUT/LLN0.gcbTrg.Out7.q"/>
+						            <Connection src="PROT/XSWI2.Opn.t" dst="OUT/LLN0.gcbTrg.Out7.t"/>
+						            <Connection src="PROT/XSWI2.Opn.general" dst="OUT/LLN0.gcbTrg.Out7.data"/>
+						        </Connection>
+						        <Connection src="PROT/XSWI2.Cls" dst="OUT/LLN0.gcbTrg.Out8" xSrc="1620.0" ySrc="240.0" xDst="30.0" yDst="360.0" c5="52.5">
+						            <Connection src="PROT/XSWI2.Cls.q" dst="OUT/LLN0.gcbTrg.Out8.q"/>
+						            <Connection src="PROT/XSWI2.Cls.t" dst="OUT/LLN0.gcbTrg.Out8.t"/>
+						            <Connection src="PROT/XSWI2.Cls.general" dst="OUT/LLN0.gcbTrg.Out8.data"/>
+						        </Connection>
+						    </LOCB>
+						</Private>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+                <LDevice inst="REP">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <Private type="CLD_PROCESS">
+						    <SGCB actSG="1" numOfSGs="1">
+						        <SettingsGroup inOfSg="1"/>
+						    </SGCB>
+						    <CNCB/>
+						</Private>
+                        <Private type="CLD_GUI">
+						    <LOCB>
+						        <Node ref="LLN0.measureRep" x="300.0" y="30.0"/>
+						        <Node ref="LLN0.protRep" x="690.0" y="30.0"/>
+						    </LOCB>
+						</Private>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+                <LDevice inst="REG">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <Private type="CLD_PROCESS">
+						    <SGCB actSG="1" numOfSGs="1">
+						        <SettingsGroup inOfSg="1">
+						            <SettingValue ref="RDRE1.TrgMod.setVal" value="1"/>
+						            <SettingValue ref="RDRE1.PreTmms.setVal" value="2000"/>
+						            <SettingValue ref="RDRE1.PstTmms.setVal" value="1000"/>
+						            <SettingValue ref="RDRE1.PerTrgTms.setVal" value="1"/>
+						            <SettingValue ref="RDRE1.MemFull.setVal" value="10"/>
+						            <SettingValue ref="RDRE1.MaxNumRcd.setVal" value="10"/>
+						            <SettingValue ref="RDRE1.ReTrgMod.setVal" value="0"/>
+						        </SettingsGroup>
+						    </SGCB>
+						    <CNCB/>
+						</Private>
+                        <Private type="CLD_GUI">
+						    <LOCB>
+						        <Node ref="RDRE1" x="330.0" y="30.0"/>
+						    </LOCB>
+						</Private>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+                <LDevice inst="OUT">
+                    <LN0 lnClass="LLN0" inst="" lnType="LLN0_T">
+                        <Private type="CLD_PROCESS">
+						    <SGCB actSG="1" numOfSGs="1">
+						        <SettingsGroup inOfSg="1"/>
+						    </SGCB>
+						    <CNCB/>
+						</Private>
+                        <Private type="CLD_GUI">
+						    <LOCB>
+						        <Node ref="LLN0.gcbTrg" x="300.0" y="30.0"/>
+						    </LOCB>
+						</Private>
+                        <SettingControl numOfSGs="1" actSG="1" desc="Settings groups"/>
+                    </LN0>
+                </LDevice>
+            </Server>
+        </AccessPoint>
+    </IED>
+</SCL>
