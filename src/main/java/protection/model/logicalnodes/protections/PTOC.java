@@ -3,6 +3,8 @@ package protection.model.logicalnodes.protections;
 import protection.model.dataobjects.measurements.WYE;
 import protection.model.dataobjects.protection.ACD;
 import protection.model.dataobjects.protection.ACT;
+import protection.model.dataobjects.protection.Direction;
+import protection.model.dataobjects.protection.ENG;
 import protection.model.dataobjects.settings.ASG;
 import protection.model.dataobjects.settings.ING;
 import protection.model.logicalnodes.common.LN;
@@ -23,7 +25,9 @@ public class PTOC extends LN {
      * Уставки
      */
     public ASG StrVal = new ASG();
-    public ING OpDlTmms = new ING(); /*TODO: Выдержка*/
+    public ING OpDlTmms = new ING();
+    public ENG DirMod = new ENG();
+    public ACD Dir = new ACD();
 
     /*
      * Выходы
@@ -40,7 +44,6 @@ public class PTOC extends LN {
 
     @Override
     public void process() {
-
         boolean phsA = A.getPhsA().getCVal().getMag().getF().getValue() > StrVal.getSetMag().getF().getValue();
         boolean phsB = A.getPhsB().getCVal().getMag().getF().getValue() > StrVal.getSetMag().getF().getValue();
         boolean phsC = A.getPhsC().getCVal().getMag().getF().getValue() > StrVal.getSetMag().getF().getValue();
@@ -48,8 +51,6 @@ public class PTOC extends LN {
         Str.getPhsA().setValue(phsA);
         Str.getPhsB().setValue(phsB);
         Str.getPhsC().setValue(phsC);
-
-        boolean general = phsA || phsB || phsC;
 
         if (phsA) CntA += 1;
         else CntA = 0;
@@ -64,9 +65,22 @@ public class PTOC extends LN {
             OpDlTmms.setSetVal(0);
         }
 
+        if (DirMod.getStVal().getValue() == Direction.FORWARD) {
+            if (Dir.getDirPhsA().getValue() == Direction.BACKWARD) {
+                CntA = 0;
+            }
+            if (Dir.getDirPhsB().getValue() == Direction.BACKWARD) {
+                CntB = 0;
+            }
+            if (Dir.getDirPhsC().getValue() == Direction.BACKWARD) {
+                CntC = 0;
+            }
+        }
+
         Op.getGeneral().setValue(CntA > OpDlTmms.getSetVal()
                 || CntB > OpDlTmms.getSetVal()
-                || CntC > OpDlTmms.getSetVal());
+                || CntC > OpDlTmms.getSetVal()
+        );
 
         Op.getPhsA().setValue(CntA > OpDlTmms.getSetVal());
         Op.getPhsB().setValue(CntB > OpDlTmms.getSetVal());

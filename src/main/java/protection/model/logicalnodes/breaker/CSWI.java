@@ -14,6 +14,15 @@ public class CSWI extends LN {
     private ACT OpOpn1  = new ACT();
     @Getter @Setter
     private ACT OpOpn2  = new ACT();
+    @Getter @Setter
+    private ACT OpOpn3  = new ACT();
+    @Getter @Setter
+    private ACT OpOpn4  = new ACT();
+    @Getter @Setter
+    private ACT OpOpn5  = new ACT();
+    @Getter @Setter
+    private ACT OpOpn6  = new ACT();
+
 
     @Getter @Setter
     private ACT OpCls = new ACT();
@@ -33,11 +42,39 @@ public class CSWI extends LN {
     @Getter @Setter
     private DPC PosC = new DPC();
 
+    private int counterAPV = 0;
+    private boolean APVinProcess = false;
+    private boolean APVoperated = false;
+
     @Override
     public void process() {
-        if (OpOpn1.getGeneral().getValue()
-                || OpOpn2.getGeneral().getValue()) {
+        boolean anyOpnGeneralValue = OpOpn1.getGeneral().getValue()
+                || OpOpn2.getGeneral().getValue()
+                || OpOpn3.getGeneral().getValue()
+                || OpOpn4.getGeneral().getValue()
+                || OpOpn5.getGeneral().getValue()
+                || OpOpn6.getGeneral().getValue();
+
+        if (counterAPV == 80) {
+            Pos.getCtlVal().setValue(true);
+            APVinProcess = true;
+            counterAPV = 0;
+        }
+        if (APVinProcess) {
+            counterAPV++;
+            if (counterAPV < 50) {
+                return;
+            } else {
+                APVinProcess = false;
+                APVoperated = true;
+            }
+        }
+
+        if (anyOpnGeneralValue) {
             Pos.getCtlVal().setValue(false);
+            if (!APVoperated) {
+                counterAPV++;
+            }
         } else {
             Pos.getCtlVal().setValue(true);
         }

@@ -27,10 +27,4 @@ public class ACD extends ACT {
 
     @Getter @Setter
     private DataAttribute<Direction> dirPhsC = new DataAttribute<>();
-
-    public enum Direction {
-        FORWARD,
-        BACKWARD,
-        BOTH
-    }
 }

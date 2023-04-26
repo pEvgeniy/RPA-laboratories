@@ -1,4 +1,4 @@
-package ru.mpei;
+package protection.service;
 
 import protection.model.logicalnodes.breaker.CSWI;
 import protection.model.logicalnodes.breaker.XCBR;
@@ -17,7 +17,7 @@ import java.util.List;
  * @created ${MONTH}/${YEAR}
  * @description
  */
-public class Main {
+public class CurrentProtection {
 
     private final static List<LN> lnList = new ArrayList<>();
 
@@ -27,15 +27,15 @@ public class Main {
         lnList.add(lcom);
         lcom.setFilePath(
                 "src/main/resources/experiments/end-of-the-line/",
-                "PhABC20"
+                "PhABC80"
         );
 
 //        Measurements
         MMXU mmxu = new MMXU();
         lnList.add(mmxu);
-        mmxu.phsAInst = lcom.OUT.get(0);
-        mmxu.phsBInst = lcom.OUT.get(1);
-        mmxu.phsCInst = lcom.OUT.get(2);
+        mmxu.phsAInstI = lcom.OUT.get(0);
+        mmxu.phsBInstI = lcom.OUT.get(1);
+        mmxu.phsCInstI = lcom.OUT.get(2);
 
 //        Protection 1
         PTOC ptoc1 = new PTOC();

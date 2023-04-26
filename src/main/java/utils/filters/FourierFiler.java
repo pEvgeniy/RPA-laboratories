@@ -10,7 +10,7 @@ import protection.model.dataobjects.measurements.MV;
  */
 public class FourierFiler extends Filter {
 
-    public static int bSize = 20;
+    public static int bSize = 80;
     private final double[] bufferX = new double[bSize];
     private final double[] bufferY = new double[bSize];
     private int bCount = 0;
@@ -20,7 +20,6 @@ public class FourierFiler extends Filter {
 
     @Override
     public void process(MV instMag, CMV result) {
-
         double value = instMag.getInstMag().getF().getValue();
 
         x += k * value * Math.sin((2 * Math.PI * 50) * (0.02/bSize) * bCount) - bufferX[bCount];
@@ -34,6 +33,7 @@ public class FourierFiler extends Filter {
             bCount = 0;
         }
 
-        result.getCVal().getMag().getF().setValue(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
+        result.getCVal().toVector(x, y);
+//        result.getCVal().getMag().getF().setValue(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
     }
 }
