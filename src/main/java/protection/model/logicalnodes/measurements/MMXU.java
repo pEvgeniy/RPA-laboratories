@@ -32,7 +32,7 @@ public class MMXU extends LN {
     public final WYE WAr = new WYE();
     public final WYE WA = new WYE();
     public final WYE PF = new WYE();
-    public final WYE Wgeneral = new WYE();
+    public final WYE Wg = new WYE();
 
 
     /*
@@ -95,7 +95,7 @@ public class MMXU extends LN {
                         PF.getPhsC().getCVal().getMag().getF().getValue()
         );
 
-        Wgeneral.getPhsA().getCVal().getMag().getF().setValue(
+        Wg.getPhsA().getCVal().getMag().getF().setValue(
                 (W.getPhsA().getCVal().getMag().getF().getValue() +
                         W.getPhsB().getCVal().getMag().getF().getValue() +
                         W.getPhsC().getCVal().getMag().getF().getValue()) / 3

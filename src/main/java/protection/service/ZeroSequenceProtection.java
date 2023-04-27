@@ -24,7 +24,7 @@ public class ZeroSequenceProtection {
         lnList.add(lcom);
         lcom.setFilePath(
                 "src/main/resources/experiments/LR2/",
-                "KZ5"
+                "KZ4"
         );
 
 //        Measurements
@@ -56,7 +56,7 @@ public class ZeroSequenceProtection {
         ptoc1.A.setPhsB(msqi.getSeqA().getC3());
         ptoc1.A.setPhsC(msqi.getSeqA().getC3());
         ptoc1.StrVal.getSetMag().getF().setValue(1000d);
-        ptoc1.OpDlTmms.setSetVal(0);
+        ptoc1.OpDlTmms.setSetVal(500);
 
         PTOC ptoc2 = new PTOC();
         lnList.add(ptoc2);
@@ -64,7 +64,7 @@ public class ZeroSequenceProtection {
         ptoc2.A.setPhsB(msqi.getSeqA().getC3());
         ptoc2.A.setPhsC(msqi.getSeqA().getC3());
         ptoc2.StrVal.getSetMag().getF().setValue(500d);
-        ptoc2.OpDlTmms.setSetVal(0);
+        ptoc2.OpDlTmms.setSetVal(200);
 
         PTOC ptoc3 = new PTOC();
         lnList.add(ptoc3);
@@ -81,7 +81,7 @@ public class ZeroSequenceProtection {
         ptoc1d.A.setPhsB(msqi.getSeqA().getC3());
         ptoc1d.A.setPhsC(msqi.getSeqA().getC3());
         ptoc1d.StrVal.getSetMag().getF().setValue(1000d);
-        ptoc1d.OpDlTmms.setSetVal(0);
+        ptoc1d.OpDlTmms.setSetVal(500);
         ptoc1d.DirMod.getStVal().setValue(Direction.FORWARD);
         ptoc1d.Dir = rdir.getDir();
 
@@ -91,7 +91,7 @@ public class ZeroSequenceProtection {
         ptoc2d.A.setPhsB(msqi.getSeqA().getC3());
         ptoc2d.A.setPhsC(msqi.getSeqA().getC3());
         ptoc2d.StrVal.getSetMag().getF().setValue(500d);
-        ptoc2d.OpDlTmms.setSetVal(0);
+        ptoc2d.OpDlTmms.setSetVal(200);
         ptoc2d.DirMod.getStVal().setValue(Direction.FORWARD);
         ptoc2d.Dir = rdir.getDir();
 
@@ -120,6 +120,12 @@ public class ZeroSequenceProtection {
         cswi.getOpOpn5().getGeneral().setValue(false);
         cswi.setOpOpn6(ptoc3d.Op);
         cswi.getOpOpn6().getGeneral().setValue(false);
+        cswi.OpDlTmms1.setSetVal(ptoc1.OpDlTmms.getSetVal());
+        cswi.OpDlTmms2.setSetVal(ptoc2.OpDlTmms.getSetVal());
+        cswi.OpDlTmms3.setSetVal(ptoc3.OpDlTmms.getSetVal());
+        cswi.OpDlTmms4.setSetVal(ptoc1d.OpDlTmms.getSetVal());
+        cswi.OpDlTmms5.setSetVal(ptoc2d.OpDlTmms.getSetVal());
+        cswi.OpDlTmms5.setSetVal(ptoc3d.OpDlTmms.getSetVal());
 
 //        Q
         XCBR xcbr = new XCBR();
@@ -160,7 +166,7 @@ public class ZeroSequenceProtection {
 //                new NHMISignal("Wc", mmxu.W.getPhsC().getCVal().getMag().getF())
 //        );
 //        nhmi.addSignals(
-//                new NHMISignal("Wg", mmxu.Wgeneral.getPhsA().getCVal().getMag().getF())
+//                new NHMISignal("Wg", mmxu.Wg.getPhsA().getCVal().getMag().getF())
 //        );
 //        nhmi.addSignals(
 //                new NHMISignal("WA", mmxu.WA.getPhsA().getCVal().getMag().getF())

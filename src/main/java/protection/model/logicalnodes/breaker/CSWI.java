@@ -4,7 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import protection.model.dataobjects.controls.DPC;
 import protection.model.dataobjects.protection.ACT;
+import protection.model.dataobjects.settings.ING;
 import protection.model.logicalnodes.common.LN;
+
 
 public class CSWI extends LN {
     /*
@@ -41,6 +43,18 @@ public class CSWI extends LN {
 
     @Getter @Setter
     private DPC PosC = new DPC();
+    @Getter @Setter
+    public ING OpDlTmms1 = new ING();
+    @Getter @Setter
+    public ING OpDlTmms2 = new ING();
+    @Getter @Setter
+    public ING OpDlTmms3 = new ING();
+    @Getter @Setter
+    public ING OpDlTmms4 = new ING();
+    @Getter @Setter
+    public ING OpDlTmms5 = new ING();
+    @Getter @Setter
+    public ING OpDlTmms6 = new ING();
 
     private int counterAPV = 0;
     private boolean APVinProcess = false;
@@ -67,6 +81,7 @@ public class CSWI extends LN {
             } else {
                 APVinProcess = false;
                 APVoperated = true;
+                setTimeDelayToZero();
             }
         }
 
@@ -78,5 +93,14 @@ public class CSWI extends LN {
         } else {
             Pos.getCtlVal().setValue(true);
         }
+    }
+
+    private void setTimeDelayToZero() {
+        OpDlTmms1.setSetVal(0);
+        OpDlTmms2.setSetVal(0);
+        OpDlTmms3.setSetVal(0);
+        OpDlTmms4.setSetVal(0);
+        OpDlTmms5.setSetVal(0);
+        OpDlTmms6.setSetVal(0);
     }
 }
