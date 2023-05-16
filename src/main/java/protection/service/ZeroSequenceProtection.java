@@ -108,6 +108,7 @@ public class ZeroSequenceProtection {
 //        Signal to Q
         CSWI cswi = new CSWI();
         lnList.add(cswi);
+        cswi.setAPV(true);
         cswi.setOpOpn1(ptoc1.Op);
         cswi.getOpOpn1().getGeneral().setValue(false);
         cswi.setOpOpn2(ptoc2.Op);

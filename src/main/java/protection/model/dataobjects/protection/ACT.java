@@ -13,14 +13,14 @@ import protection.model.common.DataAttribute;
 public class ACT extends DATA {
 
     @Getter @Setter
-    private DataAttribute<Boolean> general = new DataAttribute<>();
+    private DataAttribute<Boolean> general = new DataAttribute<>(false);
 
     @Getter @Setter
-    private DataAttribute<Boolean> phsA = new DataAttribute<>();
+    private DataAttribute<Boolean> phsA = new DataAttribute<>(false);
 
     @Getter @Setter
-    private DataAttribute<Boolean> phsB = new DataAttribute<>();
+    private DataAttribute<Boolean> phsB = new DataAttribute<>(false);
 
     @Getter @Setter
-    private DataAttribute<Boolean> phsC = new DataAttribute<>();
+    private DataAttribute<Boolean> phsC = new DataAttribute<>(false);
 }

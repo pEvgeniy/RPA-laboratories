@@ -4,11 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import protection.model.common.DATA;
 
-/**
- * @author Александр Холодов
- * @created 03/2023
- * @description
- */
 public class Vector extends DATA {
 
     @Getter @Setter
@@ -28,5 +23,14 @@ public class Vector extends DATA {
     public void setOrthogonalComponents(double magToSet, double angToSet) {
         x.getF().setValue(magToSet * Math.cos(Math.toRadians(angToSet)));
         y.getF().setValue(magToSet * Math.sin(Math.toRadians(angToSet)));
+    }
+
+    public void setResistance(CMV current, CMV voltage) {
+        ang.getF().setValue(voltage.getCVal().getAng().getF().getValue() -
+                current.getCVal().getAng().getF().getValue());
+        mag.getF().setValue(voltage.getCVal().getMag().getF().getValue() /
+                current.getCVal().getMag().getF().getValue());
+        x.getF().setValue(mag.getF().getValue() * Math.cos(Math.toRadians(ang.getF().getValue())));
+        y.getF().setValue(mag.getF().getValue() * Math.sin(Math.toRadians(ang.getF().getValue())));
     }
 }

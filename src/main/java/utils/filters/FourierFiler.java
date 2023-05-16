@@ -3,14 +3,9 @@ package utils.filters;
 import protection.model.dataobjects.measurements.CMV;
 import protection.model.dataobjects.measurements.MV;
 
-/**
- * @author Александр Холодов
- * @created 03/2023
- * @description
- */
 public class FourierFiler extends Filter {
 
-    public static int bSize = 80;
+    public static int bSize = 40;
     private final double[] bufferX = new double[bSize];
     private final double[] bufferY = new double[bSize];
     private int bCount = 0;
@@ -34,6 +29,5 @@ public class FourierFiler extends Filter {
         }
 
         result.getCVal().toVector(x, y);
-//        result.getCVal().getMag().getF().setValue(Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2)));
     }
 }
