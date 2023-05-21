@@ -1,12 +1,14 @@
 package protection.model.logicalnodes.measurements;
 
 import lombok.Getter;
+import lombok.Setter;
 import protection.model.dataobjects.measurements.CMV;
 import protection.model.dataobjects.measurements.MV;
 import protection.model.dataobjects.measurements.WYE;
 import protection.model.logicalnodes.common.LN;
 import utils.filters.Filter;
 import utils.filters.FourierFiler;
+import utils.frequency.FrequencyMeter;
 
 public class MMXU extends LN {
 
@@ -43,6 +45,7 @@ public class MMXU extends LN {
     public final WYE WA = new WYE();
     public final WYE PF = new WYE();
     public final WYE Wg = new WYE();
+    public MV Frequency = new MV();
 
 
     /*
@@ -54,16 +57,25 @@ public class MMXU extends LN {
     private final Filter phsAVoltageF = new FourierFiler();
     private final Filter phsBVoltageF = new FourierFiler();
     private final Filter phsCVoltageF = new FourierFiler();
+    private final FrequencyMeter frequencyMeter = new FrequencyMeter();
+
+    @Setter
+    private boolean freqMeter = false;
 
     @Override
     public void process() {
-        phsACurrentF.process(phsAInstI, A.getPhsA());
-        phsBCurrentF.process(phsBInstI, A.getPhsB());
-        phsCCurrentF.process(phsCInstI, A.getPhsC());
+        if (freqMeter) {
+//            phsACurrentF;
+            frequencyMeter.process(phsAInstI, Frequency);
+        }
 
-        phsAVoltageF.process(phsAInstV, PhV.getPhsA());
-        phsBVoltageF.process(phsBInstV, PhV.getPhsB());
-        phsCVoltageF.process(phsCInstV, PhV.getPhsC());
+        phsACurrentF.process(phsAInstI, A.getPhsA(), Frequency);
+        phsBCurrentF.process(phsBInstI, A.getPhsB(), Frequency);
+        phsCCurrentF.process(phsCInstI, A.getPhsC(), Frequency);
+
+        phsAVoltageF.process(phsAInstV, PhV.getPhsA(), Frequency);
+        phsBVoltageF.process(phsBInstV, PhV.getPhsB(), Frequency);
+        phsCVoltageF.process(phsCInstV, PhV.getPhsC(), Frequency);
 
         countPowers();
 
@@ -118,9 +130,16 @@ public class MMXU extends LN {
     }
 
     private void countResistance() {
+//        System.out.println("PhVA = " + PhV.getPhsA().getCVal().getMag().getF().getValue());
+//        System.out.println("PhVB = " + PhV.getPhsB().getCVal().getMag().getF().getValue());
+
         Uab.getCVal().toVector(
                 (PhV.getPhsA().getCVal().getMag().getF().getValue() - PhV.getPhsB().getCVal().getMag().getF().getValue()),
                 (PhV.getPhsA().getCVal().getAng().getF().getValue() - PhV.getPhsB().getCVal().getAng().getF().getValue()));
+
+//        System.out.println("Uab mag = " + Uab.getCVal().getMag().getF().getValue());
+//        System.out.println("Uab ang = " + Uab.getCVal().getAng().getF().getValue());
+
         Ubc.getCVal().toVector(
                 (PhV.getPhsB().getCVal().getMag().getF().getValue() - PhV.getPhsC().getCVal().getMag().getF().getValue()),
                 (PhV.getPhsB().getCVal().getAng().getF().getValue() - PhV.getPhsC().getCVal().getAng().getF().getValue()));

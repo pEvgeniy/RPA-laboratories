@@ -46,7 +46,7 @@ public class DistanceProtection {
         lnList.add(pdis1);
         pdis1.Z = mmxu.Z;
         pdis1.setOpSwing(rpsb.getOp().getGeneral().getValue());
-        pdis1.OpDlTmms.setSetVal(50);
+        pdis1.OpDlTmms.setSetVal(100);
         List<double[]> coordinatesPDIS1 = List.of(
                 new double[] {-50, 300},
                 new double[] {350, 300},
@@ -112,24 +112,26 @@ public class DistanceProtection {
                 new NHMISignal("InstValuePhsB", lcom.OUT.get(1).getInstMag().getF()));
         nhmi1.addSignals(
                 new NHMISignal("InstValuePhsC", lcom.OUT.get(2).getInstMag().getF()));
-        nhmi1.addSignals(
-                new NHMISignal("FourierValuePhsA", mmxu.A.getPhsA().getCVal().getMag().getF())
-        );
-        nhmi1.addSignals(
-                new NHMISignal("FourierValuePhsB", mmxu.A.getPhsB().getCVal().getMag().getF())
-        );
-        nhmi1.addSignals(
-                new NHMISignal("FourierValuePhsC", mmxu.A.getPhsC().getCVal().getMag().getF())
-        );
-
-        nhmi1.addSignals(
-                "rpsb. Op general",
-                new NHMISignal("Op signal", rpsb.getOp().getGeneral()));
-
-
-        nhmi1.addSignals(
-                "pdis1. Str general",
-                new NHMISignal("Str signal", pdis1.Str.getGeneral()));
+//        nhmi1.addSignals(
+//                new NHMISignal("frequency", mmxu.Frequency.getInstMag().getF()));
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsA", mmxu.A.getPhsA().getCVal().getMag().getF())
+//        );
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsB", mmxu.A.getPhsB().getCVal().getMag().getF())
+//        );
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsC", mmxu.A.getPhsC().getCVal().getMag().getF())
+//        );
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsA", mmxu.PhV.getPhsA().getCVal().getMag().getF())
+//        );
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsB", mmxu.PhV.getPhsB().getCVal().getMag().getF())
+//        );
+//        nhmi1.addSignals(
+//                new NHMISignal("FourierValuePhsC", mmxu.PhV.getPhsC().getCVal().getMag().getF())
+//        );
 
         nhmi1.addSignals(
                 "pdis1. Op general",
@@ -144,18 +146,18 @@ public class DistanceProtection {
                 "pdis1. Op phsAC",
                 new NHMISignal("pdis1 phsAC", pdis1.Op.getPhsC()));
 
-//        nhmi1.addSignals(
-//                "pdis2. Op general",
-//                new NHMISignal("Signal prot. 2", pdis2.Op.getGeneral()));
-//        nhmi1.addSignals(
-//                "pdis2. Op phsAB",
-//                new NHMISignal("pdis2 phsAB", pdis2.Op.getPhsA()));
-//        nhmi1.addSignals(
-//                "pdis2. Op phsBC",
-//                new NHMISignal("pdis2 phsBC", pdis2.Op.getPhsB()));
-//        nhmi1.addSignals(
-//                "pdis2. Op phsAC",
-//                new NHMISignal("pdis2 phsAC", pdis2.Op.getPhsC()));
+        nhmi1.addSignals(
+                "pdis2. Op general",
+                new NHMISignal("Signal prot. 2", pdis2.Op.getGeneral()));
+        nhmi1.addSignals(
+                "pdis2. Op phsAB",
+                new NHMISignal("pdis2 phsAB", pdis2.Op.getPhsA()));
+        nhmi1.addSignals(
+                "pdis2. Op phsBC",
+                new NHMISignal("pdis2 phsBC", pdis2.Op.getPhsB()));
+        nhmi1.addSignals(
+                "pdis2. Op phsAC",
+                new NHMISignal("pdis2 phsAC", pdis2.Op.getPhsC()));
 
         nhmi1.addSignals(
                 "Breaker",

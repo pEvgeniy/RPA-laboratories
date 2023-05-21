@@ -60,6 +60,7 @@ public class PDIS extends LN {
         Str.getPhsB().setValue(phsBC);
         Str.getPhsC().setValue(phsCA);
         Str.getGeneral().setValue(phsAB || phsBC || phsCA);
+//        System.out.println(Str.getGeneral().getValue());
 //        System.out.println("phsAB = " + phsAB);
 //        System.out.println("phsBC = " + phsBC);
 //        System.out.println("phsCA = " + phsCA);

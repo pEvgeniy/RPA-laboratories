@@ -10,5 +10,5 @@ import protection.model.dataobjects.measurements.MV;
  */
 public abstract class Filter {
 
-    public abstract void process(MV instMag, CMV result);
+    public abstract void process(MV instMag, CMV result, MV frequency);
 }
