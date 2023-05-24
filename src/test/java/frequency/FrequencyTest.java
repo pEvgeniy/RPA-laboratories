@@ -2,7 +2,6 @@ package frequency;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import protection.model.dataobjects.measurements.MV;
 import protection.model.logicalnodes.common.LN;
 import protection.model.logicalnodes.gui.NHMI;
 import protection.model.logicalnodes.gui.other.NHMISignal;
@@ -22,7 +21,7 @@ public class FrequencyTest {
     public void beforeEach() {
         customLCOM = new CustomLCOM();
         mmxu = new MMXU();
-        mmxu.setFreqMeter(true);
+        mmxu.setFreqMeter80(true);
         NHMI nhmi = new NHMI();
         nhmi.addSignals(new NHMISignal("signal", customLCOM.OUT.get(0).getInstMag().getF()));
         nhmi.addSignals(new NHMISignal("freq", mmxu.Frequency.getInstMag().getF()));

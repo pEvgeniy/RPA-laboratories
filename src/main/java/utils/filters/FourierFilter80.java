@@ -1,10 +1,9 @@
 package utils.filters;
 
-import lombok.Setter;
 import protection.model.dataobjects.measurements.CMV;
 import protection.model.dataobjects.measurements.MV;
 
-public class FourierFiler extends Filter {
+public class FourierFilter80 extends Filter {
 
     public int bSize = 40;
     private final double[] bufferX = new double[9999];

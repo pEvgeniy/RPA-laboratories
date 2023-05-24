@@ -7,8 +7,10 @@ import protection.model.dataobjects.measurements.MV;
 import protection.model.dataobjects.measurements.WYE;
 import protection.model.logicalnodes.common.LN;
 import utils.filters.Filter;
-import utils.filters.FourierFiler;
-import utils.frequency.FrequencyMeter;
+import utils.filters.FourierFilter20;
+import utils.filters.FourierFilter80;
+import utils.frequency.FrequencyMeter20;
+import utils.frequency.FrequencyMeter80;
 
 public class MMXU extends LN {
 
@@ -51,22 +53,46 @@ public class MMXU extends LN {
     /*
      * Переменные
      */
-    private final Filter phsACurrentF = new FourierFiler();
-    private final Filter phsBCurrentF = new FourierFiler();
-    private final Filter phsCCurrentF = new FourierFiler();
-    private final Filter phsAVoltageF = new FourierFiler();
-    private final Filter phsBVoltageF = new FourierFiler();
-    private final Filter phsCVoltageF = new FourierFiler();
-    private final FrequencyMeter frequencyMeter = new FrequencyMeter();
+    private Filter phsACurrentF;
+    private Filter phsBCurrentF;
+    private Filter phsCCurrentF;
+    private Filter phsAVoltageF;
+    private Filter phsBVoltageF;
+    private Filter phsCVoltageF;
+    private final FrequencyMeter80 frequencyMeter80 = new FrequencyMeter80();
+    private final FrequencyMeter20 frequencyMeter20 = new FrequencyMeter20();
 
     @Setter
-    private boolean freqMeter = false;
+    private boolean freqMeter80 = false;
+    @Setter
+    private boolean freqMeter20 = false;
+
+    public MMXU() {
+        this.phsACurrentF = new FourierFilter80();
+        this.phsBCurrentF = new FourierFilter80();
+        this.phsCCurrentF = new FourierFilter80();
+        this.phsAVoltageF = new FourierFilter80();
+        this.phsBVoltageF = new FourierFilter80();
+        this.phsCVoltageF = new FourierFilter80();
+    }
+
+    public MMXU(boolean setFilterFor20) {
+        if (setFilterFor20) {
+            this.phsACurrentF = new FourierFilter20();
+            this.phsBCurrentF = new FourierFilter20();
+            this.phsCCurrentF = new FourierFilter20();
+            this.phsAVoltageF = new FourierFilter20();
+            this.phsBVoltageF = new FourierFilter20();
+            this.phsCVoltageF = new FourierFilter20();
+        }
+    }
 
     @Override
     public void process() {
-        if (freqMeter) {
-//            phsACurrentF;
-            frequencyMeter.process(phsAInstI, Frequency);
+        if (freqMeter80) {
+            frequencyMeter80.process(phsAInstI, Frequency);
+        } else if (freqMeter20) {
+            frequencyMeter20.process(phsAInstI, Frequency);
         }
 
         phsACurrentF.process(phsAInstI, A.getPhsA(), Frequency);

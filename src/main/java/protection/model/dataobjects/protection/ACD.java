@@ -4,11 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import protection.model.common.DataAttribute;
 
-/**
- * @author Александр Холодов
- * @created 03/2023
- * @description Пуск защиты
- */
 public class ACD extends ACT {
 
     @Getter @Setter

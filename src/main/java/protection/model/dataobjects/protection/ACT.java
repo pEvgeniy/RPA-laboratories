@@ -5,11 +5,6 @@ import lombok.Setter;
 import protection.model.common.DATA;
 import protection.model.common.DataAttribute;
 
-/**
- * @author Александр Холодов
- * @created 03/2023
- * @description Срабатывание защиты
- */
 public class ACT extends DATA {
 
     @Getter @Setter

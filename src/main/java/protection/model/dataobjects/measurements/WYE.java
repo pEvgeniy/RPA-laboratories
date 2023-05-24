@@ -4,11 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 import protection.model.common.DATA;
 
-/**
- * @author Александр Холодов
- * @created 03/2023
- * @description Фазные значения
- */
 public class WYE extends DATA {
 
     @Getter @Setter

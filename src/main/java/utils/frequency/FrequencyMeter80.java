@@ -5,7 +5,7 @@ import protection.model.dataobjects.measurements.MV;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FrequencyMeter {
+public class FrequencyMeter80 {
 
     private double buffer = 0d;
     private int count = 0;
@@ -20,40 +20,42 @@ public class FrequencyMeter {
         double value = inst.getInstMag().getF().getValue();
         measurements.add(value);
 
-        if ((value > 0 && bufferValue < 0) || (value < 0 && bufferValue > 0)) {
-            freqList.add(value);
-
-            if (freqList.size() % 2 == 0) {
-                double curFrequency = k1 * 1 / (count * 0.00025) + (1 - k1) * (1 / (buffer * 0.00025));
-
-                if (Math.abs(curFrequency - buffer) > 1) {
-                    curFrequency = 1 / (measurements.size() * 0.00025);
-                }
-
-                frequency.getInstMag().getF().setValue(curFrequency);
-                buffer = curFrequency;
-                measurements.clear();
-            }
-            bufferValue = value;
-        } else if (bufferValue == 0) {
+        if (bufferValue == 0) {
             bufferValue = value;
         }
 
+        if ((value > 0 && bufferValue < 0) || (value < 0 && bufferValue > 0)) {
+            freqList.add(value);
 
+            if (freqList.size() == 2) {
+                double curFrequency = k1 * 1 / (count * 0.00025) + (1 - k1) * (1 / (buffer * 0.00025));
 
+                if (Math.abs(curFrequency - buffer) > buffer * 2) {
+                    curFrequency = 1 / (measurements.size() * 0.00025);
+                }
+//                System.out.println(curFrequency);
+                frequency.getInstMag().getF().setValue(curFrequency);
+                buffer = curFrequency;
+                measurements.clear();
+                freqList.clear();
+            }
+            bufferValue = value;
+        }
+    }
 
-//        double value = inst.getInstMag().getF().getValue();
-//        count++;
-//        if (crossesZero(value)) {
-//            crossings++;
-//            if (crossings == 3) {
-//                count = counterDelta(count);
-//                System.out.println(1/(count * 0.00025));
-//                frequency.getInstMag().getF().setValue(k1 * 1 / (count * 0.00025) + (1 - k1) * (1 / (buffer * 0.00025)));
-//                count = 0;
-//                crossings = 1;
-//            }
-//        }
+    private void badRealisation(MV inst, MV frequency) {
+        double value = inst.getInstMag().getF().getValue();
+        count++;
+        if (crossesZero(value)) {
+            crossings++;
+            if (crossings == 3) {
+                count = counterDelta(count);
+                System.out.println(1/(count * 0.00025));
+                frequency.getInstMag().getF().setValue(k1 * 1 / (count * 0.00025) + (1 - k1) * (1 / (buffer * 0.00025)));
+                count = 0;
+                crossings = 1;
+            }
+        }
     }
 
     private boolean crossesZero(double point) {

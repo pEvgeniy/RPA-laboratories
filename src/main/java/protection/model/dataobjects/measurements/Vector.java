@@ -25,6 +25,14 @@ public class Vector extends DATA {
         y.getF().setValue(magToSet * Math.sin(Math.toRadians(angToSet)));
     }
 
+    public double getOrtX(double mag, double ang) {
+        return mag * Math.cos(Math.toRadians(ang));
+    }
+
+    public double getOrtY(double mag, double ang) {
+        return mag * Math.sin(Math.toRadians(ang));
+    }
+
     public void setResistance(CMV current, CMV voltage) {
         ang.getF().setValue(voltage.getCVal().getAng().getF().getValue() -
                 current.getCVal().getAng().getF().getValue());
